@@ -88,6 +88,28 @@ namespace TransportCardSystem
                         }
                     case MenuItemsId.ID_VALIDATE:
                         {
+                            Console.WriteLine("Введите номер вашей карты:");
+                            var userInputId = Convert.ToInt32(Console.ReadLine());
+
+                            TransportCard result = cards.Find(value => value.CardId == userInputId);
+
+                            if (result.IsValid())
+                            {
+                                if(result.IsPaid())
+                                {
+                                    Console.WriteLine("Успешно оплачено!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Недостаточно средств на карте!");
+                                }
+                                
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Истёк срок годности вашей карты № {result.CardId}");
+                            }
+
                             break;
                         }
                     case MenuItemsId.ID_EXIT:
