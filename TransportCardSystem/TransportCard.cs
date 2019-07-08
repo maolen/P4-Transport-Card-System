@@ -17,22 +17,7 @@ namespace TransportCardSystem
         private int _wallet;
 
         public int CardId { get; private set; }
-        public int Wallet
-        {
-            get
-            {
-                return _wallet;
-            }
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException(
-                    $"{nameof(value)} должна быть больше нуля.");
-                }
-                _wallet = value;
-            } 
-        }
+        public int Wallet { get; set; }
 
         public DateTime ExpiryDate { get; private set; }
 
