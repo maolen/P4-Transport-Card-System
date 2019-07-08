@@ -21,7 +21,7 @@ namespace TransportCardSystem
         
         static void Main (string[] args)
         {
-
+            var cards = new List<TransportCard>();
             var menuItems = new string[]
             {
                 "Купить траспортную карту",
@@ -30,47 +30,70 @@ namespace TransportCardSystem
                 "Валидировать траспортную карту",
                 "Выйти"
             };
-            for(var i = 0; i < menuItems.Length; i++)
+            var isExit = false;
+            while (!isExit)
             {
-                if(i % 2 == 0)
+                for (var i = 0;i < menuItems.Length;i++)
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    if (i % 2 == 0)
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+                    else
+                    {
+                        Console.ResetColor();
+                    }
+                    Console.WriteLine($"{i + 1} - {menuItems[i]}");
                 }
-                else
-                {
-                    Console.ResetColor();
-                }
-                Console.WriteLine($"{i + 1} - {menuItems[i]}");
-            }
-            Console.ResetColor();
-            Console.WriteLine("Выбрать:");
+                Console.ResetColor();
+                Console.WriteLine("Выбрать:");
 
-            var userChoice = Convert.ToInt32(Console.ReadLine());
-            switch((MenuItemsId)userChoice)
-            {
-                case MenuItemsId.ID_BUY:
-                    {
-                        var transportCard = new TransportCard();
-                        break;
-                    }
-                case MenuItemsId.ID_RECHARGE:
-                    {
-                        break;
-                    }
-                case MenuItemsId.ID_BALANCE:
-                    {
-                        break;
-                    }
-                case MenuItemsId.ID_VALIDATE:
-                    {
-                        break;
-                    }
-                case MenuItemsId.ID_EXIT:
-                    {                        
-                        break;
-                    }
+                var userChoice = Convert.ToInt32(Console.ReadLine());
+                switch ((MenuItemsId) userChoice)
+                {
+                    case MenuItemsId.ID_BUY:
+                        {
+                            var transportCard = new TransportCard();
+                            cards.Add(transportCard);
+                            Console.WriteLine($"Номер вашей карты равен {transportCard.CardId}");
+                            break;
+                        }
+                    case MenuItemsId.ID_RECHARGE:
+                        {
+                            Console.WriteLine("Введите номер вашей карты:");
+                            var userInputId = Convert.ToInt32(Console.ReadLine());
+                            TransportCard result = cards.Find(value => value.CardId == userInputId);
+                            Console.WriteLine("Введите сколько хотите внести на баланс:");
+                            var userInputMoney = Convert.ToInt32(Console.ReadLine());
+                            result.Wallet = userInputMoney;
+                            break;
+                        }
+                    case MenuItemsId.ID_BALANCE:
+                        {
+                            Console.WriteLine("Введите номер вашей карты:");
+                            var userInputId = Convert.ToInt32(Console.ReadLine());
+                            TransportCard result = cards.Find(value => value.CardId == userInputId);
+                            Console.WriteLine($"Баланс равен {result.Wallet}.");
+                            break;
+                        }
+                    case MenuItemsId.ID_VALIDATE:
+                        {
+                            break;
+                        }
+                    case MenuItemsId.ID_EXIT:
+                        {
+                            isExit = true;
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine("Введена неправильная команда");
+                            break;
+                        }
+                }
             }
         }
+        
     }
 }
