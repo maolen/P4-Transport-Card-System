@@ -33,6 +33,7 @@ namespace TransportCardSystem
             var isExit = false;
             while (!isExit)
             {
+                Console.WriteLine();
                 for (var i = 0; i < menuItems.Length; i++)
                 {
                     if (i % 2 == 0)
@@ -47,7 +48,7 @@ namespace TransportCardSystem
                     Console.WriteLine($"{i + 1} - {menuItems[i]}");
                 }
                 Console.ResetColor();
-                Console.WriteLine("Выбрать:");
+                Console.WriteLine("\nВыбрать:");
 
                 var userChoice = Convert.ToInt32(Console.ReadLine());
                 switch ((MenuItemsId) userChoice)
@@ -61,7 +62,7 @@ namespace TransportCardSystem
                         }
                     case MenuItemsId.ID_RECHARGE:
                         {
-                            Console.WriteLine("Введите номер вашей карты:");
+                            Console.WriteLine("\nВведите номер вашей карты:");
                             var userInputId = Convert.ToInt32(Console.ReadLine());
                             TransportCard result = cards.Find(value => value.CardId == userInputId);
                             if(result.IsValid())
