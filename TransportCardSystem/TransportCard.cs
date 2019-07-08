@@ -41,5 +41,10 @@ namespace TransportCardSystem
             ExpiryDate = DateTime.Now.AddYears(SERVICE_LIFE_YEARS);
         }
 
+        public bool IsValid()
+        {
+            return ( DateTime.Now < ExpiryDate) ?  true : false;         
+        }
+
     }
 }

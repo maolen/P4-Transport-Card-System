@@ -33,7 +33,7 @@ namespace TransportCardSystem
             var isExit = false;
             while (!isExit)
             {
-                for (var i = 0;i < menuItems.Length;i++)
+                for (var i = 0; i < menuItems.Length; i++)
                 {
                     if (i % 2 == 0)
                     {
@@ -64,9 +64,17 @@ namespace TransportCardSystem
                             Console.WriteLine("Введите номер вашей карты:");
                             var userInputId = Convert.ToInt32(Console.ReadLine());
                             TransportCard result = cards.Find(value => value.CardId == userInputId);
-                            Console.WriteLine("Введите сколько хотите внести на баланс:");
-                            var userInputMoney = Convert.ToInt32(Console.ReadLine());
-                            result.Wallet = userInputMoney;
+                            if(result.IsValid())
+                            {
+                                Console.WriteLine("Введите сколько хотите внести на баланс:");
+                                var userInputMoney = Convert.ToInt32(Console.ReadLine());
+                                result.Wallet = userInputMoney;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Истёк срок годности вашей карты № {result.CardId}");
+                            }
+                            
                             break;
                         }
                     case MenuItemsId.ID_BALANCE:
@@ -75,6 +83,7 @@ namespace TransportCardSystem
                             var userInputId = Convert.ToInt32(Console.ReadLine());
                             TransportCard result = cards.Find(value => value.CardId == userInputId);
                             Console.WriteLine($"Баланс равен {result.Wallet}.");
+                            Console.WriteLine($"Карта годна до {result.ExpiryDate}");
                             break;
                         }
                     case MenuItemsId.ID_VALIDATE:
