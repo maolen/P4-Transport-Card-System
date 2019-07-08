@@ -33,7 +33,7 @@ namespace TransportCardSystem
             var isExit = false;
             while (!isExit)
             {
-                Console.WriteLine();
+                Console.WriteLine("\n");
                 for (var i = 0; i < menuItems.Length; i++)
                 {
                     if (i % 2 == 0)
@@ -50,30 +50,49 @@ namespace TransportCardSystem
                 Console.ResetColor();
                 Console.WriteLine("\nВыбрать:");
 
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 var userChoice = Convert.ToInt32(Console.ReadLine());
+                Console.ResetColor();
+
                 switch ((MenuItemsId) userChoice)
                 {
                     case MenuItemsId.ID_BUY:
                         {
                             var transportCard = new TransportCard();
                             cards.Add(transportCard);
-                            Console.WriteLine($"Номер вашей карты равен {transportCard.CardId}");
+                            Console.Write("\nНомер вашей карты равен ");
+
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write(transportCard.CardId);
+                            Console.ResetColor();
+
+                            Console.Write(".");
                             break;
                         }
                     case MenuItemsId.ID_RECHARGE:
                         {
                             Console.WriteLine("\nВведите номер вашей карты:");
+
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             var userInputId = Convert.ToInt32(Console.ReadLine());
+                            Console.ResetColor();
+
                             TransportCard result = cards.Find(value => value.CardId == userInputId);
                             if(result.IsValid())
                             {
                                 Console.WriteLine("Введите сколько хотите внести на баланс:");
+
+                                Console.ForegroundColor = ConsoleColor.Yellow;
                                 var userInputMoney = Convert.ToInt32(Console.ReadLine());
+                                Console.ResetColor();
+
                                 result.Wallet = userInputMoney;
                             }
                             else
                             {
+                                Console.ForegroundColor = ConsoleColor.Magenta;
                                 Console.WriteLine($"Истёк срок годности вашей карты № {result.CardId}");
+                                Console.ResetColor();
                             }
                             
                             break;
@@ -81,16 +100,37 @@ namespace TransportCardSystem
                     case MenuItemsId.ID_BALANCE:
                         {
                             Console.WriteLine("Введите номер вашей карты:");
+
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             var userInputId = Convert.ToInt32(Console.ReadLine());
+                            Console.ResetColor();
+
                             TransportCard result = cards.Find(value => value.CardId == userInputId);
-                            Console.WriteLine($"Баланс равен {result.Wallet}.");
-                            Console.WriteLine($"Карта годна до {result.ExpiryDate}");
+                            Console.Write("\nБаланс равен ");
+
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write(result.Wallet);
+                            Console.ResetColor();
+
+                            Console.Write(" тг.");
+
+                            Console.Write("\nКарта годна до ");
+
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write(result.ExpiryDate);
+                            Console.ResetColor();
+
+                            Console.Write(".");
+
                             break;
                         }
                     case MenuItemsId.ID_VALIDATE:
                         {
                             Console.WriteLine("Введите номер вашей карты:");
+
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             var userInputId = Convert.ToInt32(Console.ReadLine());
+                            Console.ResetColor();
 
                             TransportCard result = cards.Find(value => value.CardId == userInputId);
 
@@ -98,17 +138,23 @@ namespace TransportCardSystem
                             {
                                 if(result.IsPaid())
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Green;
                                     Console.WriteLine("Успешно оплачено!");
+                                    Console.ResetColor();
                                 }
                                 else
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Magenta;
                                     Console.WriteLine("Недостаточно средств на карте!");
+                                    Console.ResetColor();
                                 }
                                 
                             }
                             else
                             {
+                                Console.ForegroundColor = ConsoleColor.Magenta;
                                 Console.WriteLine($"Истёк срок годности вашей карты № {result.CardId}");
+                                Console.ResetColor();
                             }
 
                             break;
@@ -120,12 +166,13 @@ namespace TransportCardSystem
                         }
                     default:
                         {
+                            Console.ForegroundColor = ConsoleColor.Magenta;
                             Console.WriteLine("Введена неправильная команда");
+                            Console.ResetColor();
                             break;
                         }
                 }
             }
         }
-        
     }
 }
