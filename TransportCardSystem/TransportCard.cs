@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TransportCardSystem
 {
-    class TransportCard
+    public class TransportCard
     {
     }
 }
