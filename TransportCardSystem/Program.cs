@@ -51,7 +51,7 @@ namespace TransportCardSystem
             {
                 case MenuItemsId.ID_BUY:
                     {
-                        var transortCard = new TransportCard();
+                        var transportCard = new TransportCard();
                         break;
                     }
                 case MenuItemsId.ID_RECHARGE:
