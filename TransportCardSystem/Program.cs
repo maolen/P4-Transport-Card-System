@@ -10,7 +10,14 @@ namespace TransportCardSystem
     class Program
     {
         
-
+        public enum MenuItemsId
+        {
+            ID_BUY = 1,
+            ID_RECHARGE,
+            ID_BALANCE,
+            ID_VALIDATE,
+            ID_EXIT
+        }
         
         static void Main (string[] args)
         {
@@ -32,7 +39,6 @@ namespace TransportCardSystem
                 }
                 else
                 {
-                    //Console.BackgroundColor = ConsoleColor.Black;
                     Console.ResetColor();
                 }
                 Console.WriteLine($"{i + 1} - {menuItems[i]}");
@@ -40,7 +46,31 @@ namespace TransportCardSystem
             Console.ResetColor();
             Console.WriteLine("Выбрать:");
 
-            var userChoice = Console.ReadLine();
+            var userChoice = Convert.ToInt32(Console.ReadLine());
+            switch((MenuItemsId)userChoice)
+            {
+                case MenuItemsId.ID_BUY:
+                    {
+                        var transortCard = new TransportCard();
+                        break;
+                    }
+                case MenuItemsId.ID_RECHARGE:
+                    {
+                        break;
+                    }
+                case MenuItemsId.ID_BALANCE:
+                    {
+                        break;
+                    }
+                case MenuItemsId.ID_VALIDATE:
+                    {
+                        break;
+                    }
+                case MenuItemsId.ID_EXIT:
+                    {                        
+                        break;
+                    }
+            }
         }
     }
 }
