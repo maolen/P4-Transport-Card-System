@@ -86,7 +86,7 @@ namespace TransportCardSystem
                                 var userInputMoney = Convert.ToInt32(Console.ReadLine());
                                 Console.ResetColor();
 
-                                result.Wallet += Math.Abs(userInputMoney);
+                                result.Wallet = userInputMoney;
                             }
                             else
                             {
